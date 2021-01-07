@@ -41,9 +41,12 @@ int cameraZoom = 0;
 // Model Variables
 Model_3DS model_house;
 Model_3DS model_tree;
+Model_3DS model_Cat;
+
 
 // Textures
 GLTexture tex_ground;
+
 
 
 // Lighting Configuration Function
@@ -170,17 +173,25 @@ void myDisplay(void){
 	RenderGround();
 
 	// Draw Tree Model
+	//glPushMatrix();
+	//glTranslatef(10, 0, 0);
+	//glScalef(0.7, 0.7, 0.7);
+	//model_tree.Draw();
+	//glPopMatrix();
+
 	glPushMatrix();
-	glTranslatef(10, 0, 0);
-	glScalef(0.7, 0.7, 0.7);
-	model_tree.Draw();
+	glTranslatef(0, 0, 20);
+	glScalef(0.02, 0.02, 0.02);
+	glRotatef(180.f, 0, 1, 0);
+	model_Cat.Draw();
 	glPopMatrix();
 
+
 	// Draw house Model
-	glPushMatrix();
-	glRotatef(90.f, 1, 0, 0);
-	model_house.Draw();
-	glPopMatrix();
+	//glPushMatrix();
+	//glRotatef(90.f, 1, 0, 0);
+	//model_house.Draw();
+	//glPopMatrix();
 
 	//sky box
 	glPushMatrix();
@@ -280,10 +291,15 @@ void LoadAssets(){
 	// Loading Model files
 	model_house.Load("Models/house/house.3DS");
 	model_tree.Load("Models/tree/Tree1.3ds");
+	model_Cat.Load("Models/Cat/Cat N030213.3ds");
+
+
 
 	// Loading texture files
 	tex_ground.Load("Textures/ground.bmp");
 	loadBMP(&tex, "Textures/blu-sky-3.bmp", true);
+
+	
 }
 
 
