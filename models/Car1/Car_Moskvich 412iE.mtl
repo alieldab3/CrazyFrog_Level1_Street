@@ -1,0 +1,247 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  Deep Exploration 6.3 x64 6.3.3.8069
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl __Carpaint
+Ka 1 1 0.501961
+Kd 0 0.501961 0.501961
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Chrome
+Ka 0.3373 0.3373 0.3373
+Kd 0.3373 0.3373 0.3373
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Glass
+Ka 0.2314 0.2314 0.2314
+Kd 0.2314 0.2314 0.2314
+Ks 0 0 0
+illum 2
+Ns 10
+d 0.6
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Wl
+Ka 0.1412 0.1412 0.1412
+Kd 0.1412 0.1412 0.1412
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Light
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 10
+map_Kd 42447ef5.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Radiator
+Ka 0.2745 0.2745 0.2745
+Kd 0.2745 0.2745 0.2745
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd radiator.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Num_2
+Ka 1 1 1
+Kd 0.5882 0.5882 0.5882
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd bez.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA bez.jpg
+map_Ns 
+
+newmtl __Blk
+Ka 0.1451 0.1451 0.1451
+Kd 0.1451 0.1451 0.1451
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Chair
+Ka 0.349 0.0627 0.1373
+Kd 0.349 0.0627 0.1373
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Lgt_2
+Ka 0.8 0.4706 0.2706
+Kd 0.8 0.4706 0.2706
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl _Red
+Ka 1 0 0
+Kd 1 0 0
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Plst_blk
+Ka 0.2745 0.2745 0.2745
+Kd 0.2745 0.2745 0.2745
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __Num
+Ka 1 1 1
+Kd 0.588 0.588 0.588
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd 215-207.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 215-207.jpg
+map_Ns 
+
+newmtl __Wl1
+Ka 1 1 1
+Kd 0.588 0.588 0.588
+Ks 0 0 0
+illum 2
+Ns 10
+map_Kd Tire 640 x 635 px R200_side.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA Tire 640 x 635 px R200_side.jpg
+map_Ns 
+
+newmtl __Wl2
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.545098 0.545098 0.545098
+illum 2
+Ns 10
+map_Kd Tire6.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
