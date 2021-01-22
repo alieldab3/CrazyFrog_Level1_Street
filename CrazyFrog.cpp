@@ -14,15 +14,48 @@ GLdouble fovy = 45.0;
 GLdouble aspectRatio = (GLdouble)WIDTH / (GLdouble)HEIGHT;
 GLdouble zNear = 0.1;
 GLdouble zFar = 100;
-GLdouble xCar1 = 17.5;
-boolean Right = false;
+//For both levels
+int Level =  1;
+int waitTime = 10;
 
-GLdouble xFrog = 0;
-GLdouble yFrog = 0;
-GLdouble zFrog = 14;
-GLdouble Win = 0;
+// Model Variables Level 1
+Model_3DS model_tree1;
+Model_3DS model_Frog1;
+Model_3DS model_Car1;
+
+// Textures Level 1
+GLTexture tex_Street1;
+GLTexture tex_Ground1;
+
+//Level 1 Variables
+
+GLdouble xCar1 = 17.5;
+boolean Right1 = false;
+GLdouble xFrog1 = 0;
+GLdouble yFrog1 = 0;
+GLdouble zFrog1 = 14;
+int Win1 = 0;
 int time1 = 20;
-int zEye = 35;
+//Level 2 Variables
+GLdouble xStand2 = 17.5;
+boolean Right2 = false;
+GLdouble xFrog2 = 0;
+GLdouble yFrog2 = 0;
+GLdouble zFrog2 = 14;
+GLdouble Win2 = 0;
+int time2 = 20;
+//Level 2
+// Model Variables
+Model_3DS model_house2;
+Model_3DS model_tree2;
+Model_3DS model_Frog2;
+Model_3DS model_Stand2;
+Model_3DS model_Fence2;
+
+// Textures
+GLTexture tex_Lake2;
+GLTexture tex_Ground2;
+
 class Vector {
 public:
 	GLdouble x, y, z;
@@ -40,20 +73,13 @@ public:
 	}
 };
 
-Vector Eye(0, 10, zEye);
+Vector Eye(0, 10, 35);
 Vector At(0, 0, 0);
 Vector Up(0, 1, 0);
 
 int cameraZoom = 0;
 
-// Model Variables
-Model_3DS model_tree;
-Model_3DS model_Frog;
-Model_3DS model_Car1;
 
-// Textures
-GLTexture tex_Street;
-GLTexture tex_Ground;
 
 
 // Lighting Configuration Function
@@ -97,7 +123,7 @@ void InitMaterial() {
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 
 	// Set Material's Shine value (0->128)
-	GLfloat shininess[] = { 96.0f };
+	GLfloat shininess[] = { 96};
 	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 }
 
@@ -137,8 +163,8 @@ void myInit(void) {
 	glEnable(GL_NORMALIZE);
 }
 
-
-void RenderStreet() {
+//Level 1 Methods
+void RenderStreet1() {
 	glPushMatrix();
 	glDisable(GL_LIGHTING);	// Disable lighting 
 	
@@ -146,7 +172,7 @@ void RenderStreet() {
 	glScaled(4, 4, 4);
 	glEnable(GL_TEXTURE_2D);	// Enable 2D texturing
 
-	glBindTexture(GL_TEXTURE_2D, tex_Street.texture[0]);	// Bind the ground texture
+	glBindTexture(GL_TEXTURE_2D, tex_Street1.texture[0]);	// Bind the ground texture
 
 	glPushMatrix();
 	glBegin(GL_QUADS);
@@ -167,14 +193,14 @@ void RenderStreet() {
 	glColor3f(1, 1, 1);	// Set material back to white instead of grey used for the ground texture.
 	glPopMatrix();
 }
-void RenderGround() {
+void RenderGround1() {
 	glDisable(GL_LIGHTING);	// Disable lighting 
 
 	glColor3f(0.6, 0.6, 0.6);	// Dim the ground texture a bit
 
 	glEnable(GL_TEXTURE_2D);	// Enable 2D texturing
 
-	glBindTexture(GL_TEXTURE_2D, tex_Ground.texture[0]);	// Bind the ground texture
+	glBindTexture(GL_TEXTURE_2D, tex_Ground1.texture[0]);	// Bind the ground texture
 
 	glPushMatrix();
 	glBegin(GL_QUADS);
@@ -194,29 +220,31 @@ void RenderGround() {
 
 	glColor3f(1, 1, 1);	// Set material back to white instead of grey used for the ground texture.
 }
-void Logic() {
-	if ((xFrog <= (xCar1 + 3) && xFrog >= (xCar1 - 3)) && ((zFrog <= -8 && zFrog >= -12))) {
-		xFrog = xCar1;
-		Win = -2;
+
+
+void Logic1() {
+	if ((xFrog1 <= (xCar1 + 3) && xFrog1 >= (xCar1 - 3)) && ((zFrog1 <= -8 && zFrog1 >= -12))) {
+		xFrog1 = xCar1;
+		Win1 = -2;
 	}
 	else {
-		if ((xFrog <= (-xCar1 + 3) && xFrog >= (-xCar1 - 3)) && ( (zFrog <= 10 && zFrog >= 6))) {
-			xFrog = (-xCar1);
-			Win = -2;
+		if ((xFrog1 <= (-xCar1 + 3) && xFrog1 >= (-xCar1 - 3)) && ( (zFrog1 <= 10 && zFrog1 >= 6))) {
+			xFrog1 = (-xCar1);
+			Win1 = -2;
 		}
 		else {
-			if ((zFrog <= 10 && zFrog >= -12 && yFrog >= -1)) {
+			if ((zFrog1 <= 10 && zFrog1 >= -12 && yFrog1 >= -1)) {
 				
-				//Win = -2;
+				//Win1 = -2;
 			}
 			else {
-				if (zFrog <= -14 && zFrog >= -20) {
-					yFrog = 0;
-					Win = 1;
+				if (zFrog1 <= -14 && zFrog1 >= -20) {
+					yFrog1 = 0;
+					Win1 = 1;
 				}
 				else {
-					if ((zFrog <= 20 && zFrog >= 14)) {
-						yFrog = 0;
+					if ((zFrog1 <= 20 && zFrog1 >= 14)) {
+						yFrog1 = 0;
 					}
 				}
 			}
@@ -226,7 +254,7 @@ void Logic() {
 	glutPostRedisplay();
 }
 
-void Car1Anim() {
+void Car1Anim1() {
 	if (xCar1 >= -40 ) {
 		xCar1 -= 0.04;
 	}
@@ -239,45 +267,45 @@ void Car1Anim() {
 
 	glutPostRedisplay();
 }
-void FrogAnimFront() {
-	if (zFrog >= -17.5) {
-		zFrog -= 6;
+void FrogAnimFront1() {
+	if (zFrog1 >= -17.5) {
+		zFrog1 -= 6;
 
 	}
 	glutPostRedisplay();
 }
-void FrogAnimBack() {
-	if (zFrog <= 17.5) {
-		zFrog += 0.2;
+void FrogAnimBack1() {
+	if (zFrog1 <= 17.5) {
+		zFrog1 += 0.2;
 	}
 	glutPostRedisplay();
 }
-void FrogAnimRight() {
-	if (xFrog <= 17.5) {
-		xFrog += 0.2;
-	}
-
-	glutPostRedisplay();
-}
-void FrogAnimLeft() {
-	if (xFrog >= -17.5) {
-		xFrog -= 0.2;
+void FrogAnimRight1() {
+	if (xFrog1 <= 17.5) {
+		xFrog1 += 0.2;
 	}
 
 	glutPostRedisplay();
 }
-void FrogAnimUp() {
-	yFrog += 0.2;
+void FrogAnimLeft1() {
+	if (xFrog1 >= -17.5) {
+		xFrog1 -= 0.2;
+	}
 
 	glutPostRedisplay();
 }
-void FrogAnimDown() {
-	yFrog -= 0.2;
+void FrogAnimUp1() {
+	yFrog1 += 0.2;
+
+	glutPostRedisplay();
+}
+void FrogAnimDown1() {
+	yFrog1 -= 0.2;
 
 
 	glutPostRedisplay();
 }
-void print(float x, float y, char* string)
+void print1(float x, float y, char* string)
 {
 	int len, i;
 	len = 20;
@@ -287,136 +315,489 @@ void print(float x, float y, char* string)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, string[i]);
 	}
 }
-void Timer1(int value) {
-	if (time1 > 0 && Win == 0) {
+void timer1(int value) {
+	if (time1 > 0 && Win1 == 0) {
 		time1 -= 1;
-		glutTimerFunc(1 * 1000, Timer1, 0);
+		glutTimerFunc(1 * 1000, timer1, 0);
 	}
 	else {
-		if (Win != -2 || Win != 1) {
-			Win = -1;
+		if (Win1 != -2 && Win1 != 1) {
+			Win1 = -1;
 		}
 		
 	}
 
 	glutPostRedisplay();
 }
+
+//Level 2 Methods
+void RenderLake2() {
+	glDisable(GL_LIGHTING);	// Disable lighting 
+
+	glColor3f(0.6, 0.6, 0.6);	// Dim the ground texture a bit
+
+	glEnable(GL_TEXTURE_2D);	// Enable 2D texturing
+
+	glBindTexture(GL_TEXTURE_2D, tex_Lake2.texture[0]);	// Bind the ground texture
+
+	glPushMatrix();
+	glBegin(GL_QUADS);
+	glNormal3f(0, 1, 0);	// Set quad normal direction.
+	glTexCoord2f(0, 0);		// Set tex coordinates ( Using (0,0) -> (5,5) with texture wrapping set to GL_REPEAT to simulate the ground repeated grass texture).
+	glVertex3f(-20, 0, -20);
+	glTexCoord2f(5, 0);
+	glVertex3f(20, 0, -20);
+	glTexCoord2f(5, 5);
+	glVertex3f(20, 0, 20);
+	glTexCoord2f(0, 5);
+	glVertex3f(-20, 0, 20);
+	glEnd();
+	glPopMatrix();
+
+	glEnable(GL_LIGHTING);	// Enable lighting again for other entites coming throung the pipeline.
+
+	glColor3f(1, 1, 1);	// Set material back to white instead of grey used for the ground texture.
+}
+void RenderGround2() {
+	glDisable(GL_LIGHTING);	// Disable lighting 
+
+	glColor3f(0.6, 0.6, 0.6);	// Dim the ground texture a bit
+
+	glEnable(GL_TEXTURE_2D);	// Enable 2D texturing
+
+	glBindTexture(GL_TEXTURE_2D, tex_Ground2.texture[0]);	// Bind the ground texture
+
+	glPushMatrix();
+	glBegin(GL_QUADS);
+	glNormal3f(0, 1, 0);	// Set quad normal direction.
+	glTexCoord2f(0, 0);		// Set tex coordinates ( Using (0,0) -> (5,5) with texture wrapping set to GL_REPEAT to simulate the ground repeated grass texture).
+	glVertex3f(-20, 0, -20);
+	glTexCoord2f(5, 0);
+	glVertex3f(20, 0, -20);
+	glTexCoord2f(5, 5);
+	glVertex3f(20, 0, 20);
+	glTexCoord2f(0, 5);
+	glVertex3f(-20, 0, 20);
+	glEnd();
+	glPopMatrix();
+
+	glEnable(GL_LIGHTING);	// Enable lighting again for other entites coming throung the pipeline.
+
+	glColor3f(1, 1, 1);	// Set material back to white instead of grey used for the ground texture.
+}
+void Logic2() {
+	if ((xFrog2 <= (xStand2 + 3) && xFrog2 >= (xStand2 - 3)) && ((zFrog2 <= -8 && zFrog2 >= -12) || (zFrog2 <= 4 && zFrog2 >= 0))) {
+		xFrog2 = xStand2;
+	}
+	else {
+		if ((xFrog2 <= (-xStand2 + 3) && xFrog2 >= (-xStand2 - 3)) && ((zFrog2 <= -2 && zFrog2 >= -6) || (zFrog2 <= 10 && zFrog2 >= 6))) {
+			xFrog2 = (-xStand2);
+		}
+		else {
+			if ((zFrog2 <= 10 && zFrog2 >= -12 && yFrog2 >= -1)) {
+				yFrog2 -= 0.01;
+				Win2 = -2;
+			}
+			else {
+				if (zFrog2 <= -14 && zFrog2 >= -20) {
+					yFrog2 = 0;
+					Win2 = 1;
+				}
+				else {
+					if ((zFrog2 <= 20 && zFrog2 >= 14)) {
+						yFrog2 = 0;
+					}
+				}
+			}
+		}
+
+	}
+	glutPostRedisplay();
+}
+
+void StandAnim2() {
+	if (xStand2 <= 17.5 && Right2 == false) {
+		xStand2 += 0.02;
+	}
+	else {
+		Right2 = true;
+	}
+
+	if (xStand2 >= -17.5 && Right2 == true) {
+		xStand2 -= 0.02;
+
+	}
+	else {
+		Right2 = false;
+	}
+
+
+	glutPostRedisplay();
+}
+void FrogAnimFront2() {
+	if (zFrog2 >= -17.5) {
+		zFrog2 -= 6;
+
+	}
+	glutPostRedisplay();
+}
+void FrogAnimBack2() {
+	if (zFrog2 <= 17.5) {
+		zFrog2 += 0.2;
+	}
+	glutPostRedisplay();
+}
+void FrogAnimRight2() {
+	if (xFrog2 <= 17.5) {
+		xFrog2 += 0.2;
+	}
+
+	glutPostRedisplay();
+}
+void FrogAnimLeft2() {
+	if (xFrog2 >= -17.5) {
+		xFrog2 -= 0.2;
+	}
+
+	glutPostRedisplay();
+}
+void FrogAnimUp2() {
+	yFrog2 += 0.2;
+
+	glutPostRedisplay();
+}
+void FrogAnimDown2() {
+	yFrog2 -= 0.2;
+
+
+	glutPostRedisplay();
+}
+void print2(float x, float y, char* string)
+{
+	int len, i;
+	len = 20;
+	glRasterPos2f(x, y);
+	for (i = 0; i < len; i++)
+	{
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, string[i]);
+	}
+}
+void timer2(int value) {
+	if (time2 > 0 && Win2 == 0) {
+		time2 -= 1;
+		glutTimerFunc(1 * 1000, timer2, 0);
+	}
+	else {
+		Win2 = -1;
+	}
+
+	glutPostRedisplay();
+
+}
+void waitTimer(int value) {
+	if (waitTime != 0) {
+		waitTime -= 1;
+		glutTimerFunc(1 * 1000, waitTimer, 0);
+	}
+	else {
+		Level = 2;
+	}
+
+	glutPostRedisplay();
+
+}
+
 void myDisplay(void) {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//Level 1
+	if (Level == 1) {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	GLfloat lightIntensity[] = { 0.7, 0.7, 0.7, 1.0f };
-	GLfloat lightPosition[] = { 0.0f, 100.0f, 0.0f, 0.0f };
-	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-	glLightfv(GL_LIGHT0, GL_AMBIENT, lightIntensity);
+		GLfloat lightIntensity[] = { 0.7, 0.7, 0.7, 1.0f };
+		GLfloat lightPosition[] = { 0.0f, 100.0f, 0.0f, 0.0f };
+		glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+		glLightfv(GL_LIGHT0, GL_AMBIENT, lightIntensity);
 
-	if (Win == 0) {
-		glClear(GL_COLOR_BUFFER_BIT);
-		glColor3f(0, 0, 0);
-		char* sc[30];
-		sprintf((char*)sc, "Time Left : %d", time1);
-		print(-3, 12, (char*)sc);
-	}
-	if (Win == -1) {
-		glClear(GL_COLOR_BUFFER_BIT);
-		glColor3f(1, 0, 0);
-		char* sc[20];
-		sprintf((char*)sc, "Timeout!");
-		print(-3, 12, (char*)sc);
-	}
-	if (Win == -2) {
-		glClear(GL_COLOR_BUFFER_BIT);
-		glColor3f(1, 0, 0);
-		char* sc[20];
-		sprintf((char*)sc, "Frog Injured!");
-		print(-3, 12, (char*)sc);
-	}
-	if (Win == 1) {
-		glColor3d(0, 1, 0);
-		char* sc[20];
-		sprintf((char*)sc, "You Won !");
-		print(-3, 12, (char*)sc);
+		if (Win1 == 0) {
+			glClear(GL_COLOR_BUFFER_BIT);
+			glColor3f(0, 0, 0);
+			char* sc[30];
+			sprintf((char*)sc, "Time Left : %d", time1);
+			print1(-3, 12, (char*)sc);
+		}
+		if (Win1 == -1) {
+			glClear(GL_COLOR_BUFFER_BIT);
+			glColor3f(1, 0, 0);
+			char* sc[20];
+			sprintf((char*)sc, "timeout!");
+			print1(-3, 12, (char*)sc);
+		}
+		if (Win1 == -2) {
+			glClear(GL_COLOR_BUFFER_BIT);
+			glColor3f(1, 0, 0);
+			char* sc[20];
+			sprintf((char*)sc, "Frog Injured!");
+			print1(-3, 12, (char*)sc);
+		}
+		if (Win1 == 1) {
+			glColor3d(0, 1, 0);
+			char* sc[20];
+			sprintf((char*)sc, "You Won !");
+			print1(-3, 13, (char*)sc);
 
-		glColor3d(0, 1, 0);
-		char* sc1[20];
-		sprintf((char*)sc1, "Score : %d", time1 * 5);
-		print(-3, 10, (char*)sc1);
-	}
-
-	// Draw Street
-	RenderStreet();
-
-	// Draw Start Ground
-	glPushMatrix();
-	glTranslatef(0, 0.1, 20);
-	glScalef(1, 0.7, 0.3);
-	RenderGround();
-	glPopMatrix();
-
-	// Draw End Ground
-	glPushMatrix();
-	glTranslatef(0, 0.1, -45);
-	glScalef(10, 0.7, 1.5);
-	RenderGround();
-	glPopMatrix();
+			glColor3d(0, 1, 0);
+			char* sc1[20];
+			sprintf((char*)sc1, "Score : %d", time1 * 5);
+			print1(-3, 12, (char*)sc1);
+			//waitTimer(1);
+			Level++;
+			timer2(1);
+			
 
 
+		    	
+		}
 
-	// Draw Trees Model
-	for (int i = 0; i < 80; i+=6) {
+		// Draw Street
+		RenderStreet1();
+
+		// Draw Start Ground
 		glPushMatrix();
-		glTranslatef(i-40, 0, -20);
-		glScalef(0.7, 0.7, 0.7);
-		model_tree.Draw();
+		glTranslatef(0, 0.1, 20);
+		glScalef(1, 0.7, 0.3);
+		RenderGround1();
 		glPopMatrix();
+
+		// Draw End Ground
+		glPushMatrix();
+		glTranslatef(0, 0.1, -45);
+		glScalef(10, 0.7, 1.5);
+		RenderGround1();
+		glPopMatrix();
+
+
+
+		// Draw Trees Model
+		for (int i = 0; i < 80; i += 6) {
+			glPushMatrix();
+			glTranslatef(i - 40, 0, -20);
+			glScalef(0.7, 0.7, 0.7);
+			model_tree1.Draw();
+			glPopMatrix();
+		}
+
+
+		// Draw Car 1 Model
+		glPushMatrix();
+		glTranslatef(xCar1, 0, -10);
+		glScalef(0.0015, 0.0015, 0.0015);
+		glRotatef(90.f, 0, 1, 0);
+		glutIdleFunc(Car1Anim1);
+		model_Car1.Draw();
+		glPopMatrix();
+
+
+		// Draw Car 2 Model
+		glPushMatrix();
+		glTranslatef(-xCar1, 0, 8);
+		glScalef(0.0015, 0.0015, 0.0015);
+		glRotatef(-90.f, 0, 1, 0);
+		glutIdleFunc(Car1Anim1);
+		model_Car1.Draw();
+		glPopMatrix();
+
+
+		// Draw Frog Model
+		glPushMatrix();
+		glTranslatef(xFrog1, yFrog1, zFrog1);
+		glScalef(30, 30, 30);
+		glRotatef(180.f, 0, 1, 0);
+		model_Frog1.Draw();
+		glPopMatrix();
+
+
+		//sky box
+		glPushMatrix();
+		glRotatef(-45.f, 0, 1, 0);
+		GLUquadricObj* qobj;
+		qobj = gluNewQuadric();
+		glTranslated(50, 0, 0);
+		glRotated(90, 1, 0, 1);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		gluQuadricTexture(qobj, true);
+		gluQuadricNormals(qobj, GL_SMOOTH);
+		gluSphere(qobj, 100, 100, 100);
+		gluDeleteQuadric(qobj);
+
+		glPopMatrix();
+		Logic1();
+
+		glutSwapBuffers();
 	}
+	if (Level == 2) {
+		
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		GLfloat lightIntensity[] = { 0.7, 0.7, 0.7, 1.0f };
+		GLfloat lightPosition[] = { 0.0f, 100.0f, 0.0f, 0.0f };
+		glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+		glLightfv(GL_LIGHT0, GL_AMBIENT, lightIntensity);
+
+		if (Win2 == 0) {
+			glClear(GL_COLOR_BUFFER_BIT);
+			glColor3f(0, 0, 0);
+			char* sc[30];
+			sprintf((char*)sc, "Time Left : %d", time2);
+			print2(-3, 12, (char*)sc);
+		}
+		if (Win2 == -1) {
+			glClear(GL_COLOR_BUFFER_BIT);
+			glColor3f(1, 0, 0);
+			char* sc[20];
+			sprintf((char*)sc, "Timeout!");
+			print2(-3, 12, (char*)sc);
+		}
+		if (Win2 == -2) {
+			glClear(GL_COLOR_BUFFER_BIT);
+			glColor3f(1, 0, 0);
+			char* sc[20];
+			sprintf((char*)sc, "Frog Sank!");
+			print2(-3, 12, (char*)sc);
+		}
+		if (Win2 == 1) {
+			glColor3d(0, 1, 0);
+			char* sc[20];
+			sprintf((char*)sc, "You Won !");
+			print2(-3, 12, (char*)sc);
+
+			glColor3d(0, 1, 0);
+			char* sc1[20];
+			sprintf((char*)sc1, "Score : %d", time2 * 5);
+			print2(-3, 10, (char*)sc1);
+		}
+
+		// Draw Lake
+		RenderLake2();
+
+		// Draw Start Ground
+		glPushMatrix();
+		glTranslatef(0, 0.1, -20);
+		glScalef(1, 0.7, 0.3);
+		RenderGround2();
+		glPopMatrix();
+
+		// Draw End Ground
+		glPushMatrix();
+		glTranslatef(0, 0.1, 20);
+		glScalef(1, 0.7, 0.3);
+		RenderGround2();
+		glPopMatrix();
 
 
-	// Draw Car 1 Model
-	glPushMatrix();
-	glTranslatef(xCar1, 0, -10);
-	glScalef(0.0015, 0.0015, 0.0015);
-	glRotatef(90.f, 0, 1, 0);
-	glutIdleFunc(Car1Anim);
-	model_Car1.Draw();
-	glPopMatrix();
 
-	
-	// Draw Car 2 Model
-	glPushMatrix();
-	glTranslatef(-xCar1, 0, 8);
-	glScalef(0.0015, 0.0015, 0.0015);
-	glRotatef(-90.f, 0, 1, 0);
-	glutIdleFunc(Car1Anim);
-	model_Car1.Draw();
-	glPopMatrix();
+		// Draw Tree 1 Model
+		glPushMatrix();
+		glTranslatef(10, 0, -20);
+		glScalef(0.7, 0.7, 0.7);
+		model_tree2.Draw();
+		glPopMatrix();
+
+		// Draw Tree 2 Model
+		glPushMatrix();
+		glTranslatef(-10, 0, -20);
+		glScalef(0.7, 0.7, 0.7);
+		model_tree2.Draw();
+		glPopMatrix();
+
+		// Draw house Model
+		glPushMatrix();
+		glTranslatef(0, 0, -20);
+		glRotatef(90.f, 1, 0, 0);
+		model_house2.Draw();
+		glPopMatrix();
+
+		// Draw Left Fence Model
+		glPushMatrix();
+		glTranslatef(-20, 0, 0);
+		glRotatef(90.f, 0, 1, 0);
+		glScalef(0.2, 0.04, 0.05);
+		model_Fence2.Draw();
+		glPopMatrix();
+
+		// Draw Right2 Fence Model
+		glPushMatrix();
+		glTranslatef(20, 0, 0);
+		glRotatef(90.f, 0, 1, 0);
+		glScalef(0.2, 0.04, 0.05);
+		model_Fence2.Draw();
+		glPopMatrix();
+
+		// Draw Front Fence Model
+		glPushMatrix();
+		glTranslatef(0, 0, -23);
+		glScalef(0.18, 0.04, 0.05);
+		model_Fence2.Draw();
+		glPopMatrix();
+
+		// Draw Stand 1 Model
+		glPushMatrix();
+		glTranslatef(xStand2, 0, -10);
+		glScalef(0.05, 0.05, 0.05);
+		glutIdleFunc(StandAnim2);
+		model_Stand2.Draw();
+		glPopMatrix();
+
+		// Draw Stand 2 Model
+		glPushMatrix();
+		glTranslatef(-xStand2, 0, -4);
+		glScalef(0.05, 0.05, 0.05);
+		glutIdleFunc(StandAnim2);
+		model_Stand2.Draw();
+		glPopMatrix();
+
+		// Draw Stand 3 Model
+		glPushMatrix();
+		glTranslatef(xStand2, 0, 2);
+		glScalef(0.05, 0.05, 0.05);
+		glutIdleFunc(StandAnim2);
+		model_Stand2.Draw();
+		glPopMatrix();
+
+		// Draw Stand 4 Model
+		glPushMatrix();
+		glTranslatef(-xStand2, 0, 8);
+		glScalef(0.05, 0.05, 0.05);
+		glutIdleFunc(StandAnim2);
+		model_Stand2.Draw();
+		glPopMatrix();
 
 
-	// Draw Frog Model
-	glPushMatrix();
-	glTranslatef(xFrog, yFrog, zFrog);
-	glScalef(30, 30, 30);
-	glRotatef(180.f, 0, 1, 0);
-	model_Frog.Draw();
-	glPopMatrix();
+		// Draw Frog Model
+		glPushMatrix();
+		glTranslatef(xFrog2, yFrog2, zFrog2);
+		glScalef(30, 30, 30);
+		glRotatef(180.f, 0, 1, 0);
+		model_Frog2.Draw();
+		glPopMatrix();
 
 
-	//sky box
-	glPushMatrix();
-	glRotatef(-45.f, 0, 1, 0);
-	GLUquadricObj* qobj;
-	qobj = gluNewQuadric();
-	glTranslated(50, 0, 0);
-	glRotated(90, 1, 0, 1);
-	glBindTexture(GL_TEXTURE_2D, tex);
-	gluQuadricTexture(qobj, true);
-	gluQuadricNormals(qobj, GL_SMOOTH);
-	gluSphere(qobj, 100, 100, 100);
-	gluDeleteQuadric(qobj);
+		//sky box
+		glPushMatrix();
+		glRotatef(-45.f, 0, 1, 0);
+		GLUquadricObj* qobj;
+		qobj = gluNewQuadric();
+		glTranslated(50, 0, 0);
+		glRotated(90, 1, 0, 1);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		gluQuadricTexture(qobj, true);
+		gluQuadricNormals(qobj, GL_SMOOTH);
+		gluSphere(qobj, 100, 100, 100);
+		gluDeleteQuadric(qobj);
 
-	glPopMatrix();
-	Logic();
+		glPopMatrix();
+		Logic2();
 
-	glutSwapBuffers();
+		glutSwapBuffers();
+	}
 }
 
 
@@ -433,36 +814,52 @@ void myKeyboard(unsigned char button, int x, int y) {
 		exit(0);
 		break;
 	case 'w':
-		if (Win != -2 || Win!=-1) {
-			glutIdleFunc(FrogAnimFront);
+		if (Win1 != -2 && Win1!=-1 && Level == 1) {
+			glutIdleFunc(FrogAnimFront1);
+			break;
+		}
+		if (Win1 != -2 && Win1 != -1 && Level == 2) {
+			glutIdleFunc(FrogAnimFront2);
 			break;
 		}
 		
 	case 's':
-		if (Win != -2|| Win!=-1) {
-			glutIdleFunc(FrogAnimBack);
+		if (Win1 != -2 && Win1 != -1 && Level == 1) {
+			glutIdleFunc(FrogAnimBack1);
 			break;
 		}
-		
+		if (Win1 != -2 && Win1 != -1 && Level == 2) {
+			glutIdleFunc(FrogAnimBack2);
+			break;
+		}
 	case 'd':
-		if (Win != -2 || Win!=-1) {
-			glutIdleFunc(FrogAnimRight);
+		if (Win1 != -2 && Win1 != -1 && Level == 1) {
+			glutIdleFunc(FrogAnimRight1);
+			break;
+		}
+		if (Win1 != -2 && Win1 != -1 && Level == 2) {
+			glutIdleFunc(FrogAnimRight2);
 			break;
 		}
 		
 	case 'a':
-		if (Win != -2 || Win!=-1) {
-			glutIdleFunc(FrogAnimLeft);
+
+		if (Win1 != -2 && Win1 != -1 && Level == 1) {
+			glutIdleFunc(FrogAnimLeft1);
+			break;
+		}
+		if (Win1 != -2 && Win1 != -1 && Level == 2) {
+			glutIdleFunc(FrogAnimLeft2);
 			break;
 		}
 		
 
 	case 'z':
-		zEye = 35;
+		
 		break;
 
 	case 'x':
-		zEye = zFrog;
+		
 		break;
 
 	default:
@@ -514,7 +911,7 @@ void myReshape(int w, int h) {
 	WIDTH = w;
 	HEIGHT = h;
 
-	// set the drawable region of the window
+	// set the drawable region of the Win1dow
 	glViewport(0, 0, w, h);
 
 	// set up the projection matrix 
@@ -530,16 +927,30 @@ void myReshape(int w, int h) {
 
 
 void LoadAssets() {
+	//Level 1
 	// Loading Model files
-	model_tree.Load("Models/tree/Tree1.3ds");
-	model_Frog.Load("Models/Frog/3ds/Frog.3ds");
+	model_tree1.Load("Models/tree/Tree1.3ds");
+	model_Frog1.Load("Models/Frog/3ds/Frog.3ds");
 	model_Car1.Load("Models/Car1/Car1.3DS");
 
 
 	// Loading texture files
-	tex_Ground.Load("Textures/Ground.bmp");
-	tex_Street.Load("Textures/Street.bmp");
+	tex_Ground1.Load("Textures/Ground 1.bmp");
+	tex_Street1.Load("Textures/Street.bmp");
 	loadBMP(&tex, "Textures/sky.bmp", true);
+
+	//Level 2
+	// Loading Model files
+	model_house2.Load("Models/house/house.3DS");
+	model_tree2.Load("Models/tree/Tree1.3ds");
+	model_Frog2.Load("Models/Frog/3ds/Frog.3ds");
+	model_Stand2.Load("Models/Stand/stand.3DS");
+	model_Fence2.Load("Models/Fence/Fence with window N280817.3DS");
+
+	// Loading texture files
+	tex_Ground2.Load("Textures/Ground 2.bmp");
+	tex_Lake2.Load("Textures/Lake.bmp");
+	loadBMP(&tex, "Textures/blu-sky-3.bmp", true);
 }
 
 
@@ -562,6 +973,6 @@ void main(int argc, char** argv) {
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_COLOR_MATERIAL);
 	glShadeModel(GL_SMOOTH);
-	Timer1(1);
+	timer1(1);
 	glutMainLoop();
 }
